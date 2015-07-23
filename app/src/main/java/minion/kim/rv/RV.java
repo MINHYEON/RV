@@ -58,15 +58,19 @@ public class RV extends ActionBarActivity implements SensorEventListener{
     public void onSensorChanged(SensorEvent event){
         Sensor sensor = event.sensor;
         String acc;
+        float[] orient = {};
 
         if(sensor.getType() == Sensor.TYPE_ORIENTATION){
+
             yaw = event.values[0];
             pitch = event.values[1];
             roll = event.values[2];
 
-            Log.d("debug","mAzimuth :"+Float.toString(yaw));
-            Log.d("debug","mPitch :"+Float.toString(pitch));
-            Log.d("debug", "mRoll :"+Float.toString(roll));
+            new Thread(new client_UDP(yaw, pitch, roll)).start();
+
+            //Log.d("debug","mAzimuth :"+Float.toString(yaw));
+            //Log.d("debug","mPitch :"+Float.toString(pitch));
+            //Log.d("debug", "mRoll :"+Float.toString(roll));
 
             //System.out.println("yaw : " + yaw + "pitch : " + pitch + "roll : " + roll);
 
